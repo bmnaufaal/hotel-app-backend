@@ -38,12 +38,12 @@ class AuthController extends Controller
                         'access_token' => $tokenResult,
                         'token_type' => 'Bearer'
                     ]
-                ]);
+                ], 200);
             } else {
                 return response()->json([
                     'status' => 'Error',
                     'message' => 'Username atau password salah'
-                ]);
+                ], 401);
             }
         }
     }
@@ -51,7 +51,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = $request->user();
-        $user->currentAcccessToken()->delete();
+        $user->currentAccessToken()->delete();
         return response()->json([
             'status' => 'Successs',
             'message' => 'Berhasil logout'
@@ -82,7 +82,7 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => 'Success',
                     'message' => 'Berhasil mendaftarkan pengguna'
-                ]);
+                ], 200);
             } else {
                 return response()->json([
                     'status' => 'Error',
